@@ -1,0 +1,247 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #E7DED7;
+}
+span{
+    color: #999999;
+}
+.article{
+    background: rgba(255,255,255,0.5);
+    width: 900px;
+    border-radius: 10px;
+    margin: 10px auto 10px auto;
+}
+#nav{
+    /*border: red 1px solid;*/
+    padding-left: 20px;
+    padding-top: 20px;
+}
+#nav hr{
+    margin-top: 5px;
+    border: none;
+    width: 300px;
+    height: 0.6px;
+    background-color: #EEEEEE;
+}
+#nav i{
+    color: cadetblue;
+}
+#nav .nav_ad{
+    color: cadetblue;
+}
+#title{
+    padding-top: 20px;
+    padding-left: 30px;
+    /*border: #DA448E solid 1px;*/
+}
+#title span{
+   font-size: 30px;
+    color: #333333;
+}
+#title i{
+    font-size: 40px;
+    color: black;
+}
+#aside_nav{
+    margin-top: 20px;
+    display: block;
+    padding-left: 425px;
+    /*border: #DA448E solid 1px;*/
+}
+#aside_nav i{
+    width: 7px;
+    color: #666666;
+    font-size: 10px;
+    cursor: pointer;
+}
+#aside_nav i:hover{
+    color: #DA448E;
+}
+#aside_nav span:hover{
+    color: cadetblue;
+}
+.hr{
+    margin-top: 10px;
+    border: none;
+    width: 900px;
+    height: 1.8px;
+    background-color: #EEEEEE;
+}
+#content{
+    width: 900px;
+    height: 100px;
+    border: red 1px solid;
+}
+#words {
+    position: relative;
+    background: rgba(255,255,255,0.5);
+    width: 900px;
+    height: auto;
+    border-radius: 10px;
+    margin: 10px auto 10px auto;
+}
+#words_my{
+    padding: 15px;
+}
+#words_my i{
+    color: cadetblue;
+    font-size: 22px;
+}
+#words_my span{
+    color: cadetblue;
+    font-size: 23px;
+}
+#words_my textarea{
+    display: block;
+    width: 800px;
+    height: 80px;
+    margin-left: 30px;
+    margin-top: 20px;
+    resize: none;
+    font-size: 16px;
+    padding: 10px;
+    font-family: "微软雅黑";
+    line-height: 23px;
+}
+
+
+
+
+/*表情评论样式*/
+.emojiSvg {
+    width: 2em;
+    height: 2em;
+}
+
+div.newpost {
+    line-height: 28px;
+    font-size: 20px;
+    padding: 10px;
+    background: rgba(255,255,255,0.8);
+    width: 820px;
+    height: 70px;
+    margin: 10px 10px 10px 14px;
+    word-wrap: break-word;
+    /*border-bottom: 1px solid #cccccc;*/
+    border: #ccccb3 1px solid;
+    border-radius: 5px;
+    overflow-y:auto;
+    outline: none;
+    font-family: "宋体";
+}
+
+#face {
+    width: 550px;
+    height: auto;
+    border: #ccccb3 1px solid;
+    padding: 15px 1px 15px 15px;
+    display: none;
+    z-index: 10;
+}
+#emoji{
+    margin-left: 18px;
+}
+#publish{
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    top: 150px;
+    left: 790px;
+    background-color: cadetblue;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+#words_ifon{
+    width: 300px;
+    height: 170px;
+    margin:0 auto;
+    border: #EEEEEE solid 1px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.care{
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+.care i:before{
+    content: url("./img/注意.png");
+    margin-left: 20px;
+}
+.care span{
+    color: #5d5d5d;
+}
+.name{
+    border-radius: 5px;
+    height: 48px;
+    width: 270px;
+    margin-left: 17px;
+    background: #FAFFBD;
+    border: #CACAC9 solid 1px;
+}
+.name input{
+    /*border: red solid 1px;*/
+    height: 40px;
+    width: 200px;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    background: #FAFFBD;
+    /*margin-top: -40px;*/
+}
+.person:before{
+    content: url("./img/人.png");
+    margin-left: 10px;
+}
+.email{
+    border-radius: 5px;
+    height: 48px;
+    width: 270px;
+    margin-left: 17px;
+    background: #FAFFBD;
+    border: #CACAC9 solid 1px;
+}
+.email input{
+    height: 40px;
+    width: 170px;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    background: #FAFFBD;
+    /*border: red solid 1px;*/
+}
+.email_:before{
+    content: url("./img/邮箱.png");
+    margin-left: 10px;
+}
+#words_content{
+    height: 400px;
+    width: 98%;
+    /*border: #DA448E 1px solid;*/
+    padding: 30px 10px 10px 10px;
+}
+.person_words{
+    margin-left: 20px;
+}
+.person_content{
+    background: rgba(255,255,255,0.6);
+    width: 720px;
+    height: auto;
+    margin-left: 20px;
+    border: #EEEEEE solid 1px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px;
+}
+.person_words i:before{
+    content: url("./img/头像.png");
+}
+.person_content div{
+    margin-left: 520px;
+}
+.person_content div span:nth-child(2){
+    color: royalblue;
+}

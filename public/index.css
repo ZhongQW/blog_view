@@ -1,0 +1,118 @@
+body {
+    color: white;
+    font-size: 12px;
+    overflow-x:hidden;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+    color: #5d5d5d;
+}
+p{
+    color: #5d5d5d;
+}
+li{
+    list-style: none;
+}
+.bg {
+    background: #E8DFD8 url(../img/top.jpg) 50% top scroll no-repeat;
+    width: auto;
+    height: auto;
+}
+
+/*雪花飘落*/
+#snowMask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/snow1.png'), url('../img/snow2.png');
+    animation: 3s snow linear infinite;
+    pointer-events: none;/*可以指示鼠标事件穿过该元素，并指向位于元素下面的元素*/
+}
+@keyframes snow {
+    0% {
+        background-position: 500px 500px, 500px 500px;
+    }
+    100% {
+        background-position: 0px 900px, 0px 1000px;
+    }
+}
+
+/*导航栏*/
+/*闪烁的文字*/
+.name a {
+    font-size: 35px;
+    display: inline-block;
+    font-weight: bold;
+    /*border: aqua solid 1px;*/
+    margin: 40px auto 10px 150px;
+    color: rgba(224, 164, 96, 0.5);
+    background: -webkit-linear-gradient(-30deg,
+    rgba(218, 112, 214, 0) 30px,
+    rgba(218, 112, 214, 1) 60px,
+    rgba(218, 112, 214, 1) 70px,
+    rgba(218, 112, 214, 0) 100px) -100px no-repeat;
+    -webkit-background-clip: text;
+}
+.name p{
+    margin: 20px auto 60px 150px;
+}
+/*导航设置*/
+.nav{
+    position: relative;
+    height: 27px;
+    margin-left: 200px;
+    margin-right: 535px;
+    /*border: #DA448E solid 2px;*/
+}
+
+.life_>div{
+    display: none;
+ }
+
+/*普通导航*/
+.nav ul{
+    padding-top: 1px;
+    padding-left: 30px;
+}
+.nav ul li{
+    display: inline-block;
+    float: left;
+    color: darksalmon;
+    padding: 2px;
+    transition: 0.6s;
+    height: 40px;
+    margin-right: 40px;
+}
+.nav ul li a{
+    font: bold 16px Arial;
+    color: darksalmon;
+    display: inline-block;
+    padding-top: 10px;
+}
+.nav ul li a:hover{
+    color: black;
+    font-weight: bold;
+}
+
+/*中间内容*/
+.content_{
+    width: 100%;
+    /*border: black 1px solid;*/
+    height: 1300px;
+
+}
+#blog_{
+    border: none;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    height:1300px;
+    /*border: #333333 solid 1px;*/
+}
+
