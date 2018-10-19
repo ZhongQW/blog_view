@@ -2,9 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>留言板</title>
+    <title>留言</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js"></script>
 </head>
+
 <body>
-<h1>留言板</h1>
+<div id="message">
+    <div>
+        <div id="words_my">
+            <i class="fa fa-envira" aria-hidden="true"></i>
+            <span>发表我的留言</span>
+            <div name="note" class="newpost" id="emojiInput" contenteditable="true"></div>
+            <img src="img/smile.png" id="emoji"/>
+            <div id="face"></div>
+            <button id="publish">发表留言</button>
+        </div>
+        <div id="words_ifon">
+            <div class="care">
+                <i class="care_"></i>
+                <span>发表留言前请填写以下信息！</span>
+            </div>
+            <div class="name">
+                <i class="person"></i>
+                <input type="text" placeholder="姓名"/>
+            </div>
+            <div class="email">
+                <i class="email_"></i>
+                <input type="email" placeholder="邮箱"/>
+            </div>
+         </div>
+    </div>
+    <ul id="messageList">
+        <li>
+            <div class="box">
+                <div class="pic"></div>
+                <div class="ico"></div>
+                <div class="content text">好好哈哈哈</div>
+                <div class="reply text">好好学习，天天做出好东西~~</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="pic"></div>
+                <div class="ico"></div>
+                <div class="content text">好好哈哈哈</div>
+                <div class="reply text">好好学习，天天做出好东西~~</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="pic"></div>
+                <div class="ico"></div>
+                <div class="content text">好好哈哈哈</div>
+                <div class="reply text">好好学习，天天做出好东西~~</div>
+            </div>
+        </li>
+        <li>
+            <div class="box">
+                <div class="pic"></div>
+                <div class="ico"></div>
+                <div class="content text">好好哈哈哈</div>
+                <div class="reply text">好好学习，天天做出好东西~~</div>
+            </div>
+        </li>
+    </ul>
+</div>
+
 </body>
 </html>
