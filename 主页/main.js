@@ -1,4 +1,40 @@
 window.onload = function(){
+    $.ajax({
+        type: "post",
+        url: "http://localhost:8888/owner/get",
+        data: {
+
+        },
+        success: function(res){
+            if(!res.error){
+                console.log(res.result);
+                let span = document.createElement('span');
+                span.innerHTML = res.result[0].motto;
+                document.getElementById('backbroad').appendChild(span);
+                let li_1 = document.createElement('li');
+                li_1.innerHTML = '姓名：' + res.result[0].name;
+                let li_2 = document.createElement('li');
+                li_2.innerHTML = '网名：' + res.result[0].nickname;
+                let li_3 = document.createElement('li');
+                li_3.innerHTML = '邮箱：' + res.result[0].email;
+                let li_4 = document.createElement('li');
+                li_4.innerHTML = '现居：' + res.result[0].address;
+                let li_5 = document.createElement('li');
+                li_5.innerHTML = '职业：' + res.result[0].job;
+                let div_content = document.getElementsByClassName('content_f')[0];
+                div_content.appendChild(li_1);
+                div_content.appendChild(li_2);
+                div_content.appendChild(li_3);
+                div_content.appendChild(li_4);
+                div_content.appendChild(li_5);
+            }else{
+                alert(res.result);
+            }
+        },
+        error: function(res){
+            alert("加载失败"+JSON.stringify(res));
+        }
+    });
 
     /*琴弦文字*/
     var oList = document.getElementById('list');
@@ -98,4 +134,4 @@ window.onload = function(){
         },interval);
     }
 
-}
+};

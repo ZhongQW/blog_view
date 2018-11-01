@@ -167,3 +167,18 @@ a, li{
     left: 900px;
     z-index: -1;
 }
+.file a:hover{
+    color: #dea32c;
+}
+.file li{
+    cursor: pointer;
+}
+.content_f li{
+    list-style: none;
+    height: 30px;
+    margin: 0 auto auto 1px;
+    font: 15px/30px "宋体";
+    position: relative;
+    text-indent: 5px;
+    color: #5d5d5d;
+}
