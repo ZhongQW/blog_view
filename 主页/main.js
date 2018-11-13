@@ -1,7 +1,7 @@
 window.onload = function(){
     $.ajax({
         type: "post",
-        url: "http://localhost:8888/owner/get",
+        url: "http://47.94.97.26:8888/owner/get",
         data: {
 
         },
@@ -35,6 +35,17 @@ window.onload = function(){
             alert("加载失败"+JSON.stringify(res));
         }
     });
+
+    /*鼠标触摸事件*/
+    let article = document.getElementsByClassName('art_1');
+    for(let i=0;i<article.length;i++){
+        article[i].onmouseover = function(){
+            this.getElementsByClassName('clubs')[0].style.left = '500px';
+        };
+        article[i].onmouseout = function(){
+            this.getElementsByClassName('clubs')[0].style.left = '560px';
+        }
+    }
 
     /*琴弦文字*/
     var oList = document.getElementById('list');

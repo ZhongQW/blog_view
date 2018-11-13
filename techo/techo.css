@@ -56,9 +56,9 @@ p{
     transition: all 1.5s;
     cursor: pointer;
 }
-.content_ img:hover{
-    transform: scale(1.2);
-}
+/*.content_ img:hover{*/
+    /*transform: scale(1.2);*/
+/*}*/
 .ess{
     width: 700px;
     font: 10px/26px "微软雅黑";
@@ -92,6 +92,7 @@ span{
 #essay{
     /*border:  red 1px solid;*/
     margin-left: 100px;
+    height: 1030px;
 }
 .bottom i:hover{
     color: #DA448E;

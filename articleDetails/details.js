@@ -4,14 +4,19 @@ window.onload = function() {
     //加载文章
     $.ajax({
         type: "post",
-        url: "http://localhost:8888/article/getonetext",
+        url: "http://47.94.97.26:8888/article/getonetext",
         data: {
-            id: 1
+            id: sessionStorage.getItem("article_id")
         },
         success: function(res){
             if(!res.error){
                 $('#content').html(res.result[0].articleContent);
                 $('#article_name').html(res.result[0].articleTitle);
+                // alert($('#content').height());
+                $(".article").height($('#content').height()+270);
+                $("#details").height($("#words_content").height() + $(".article").height() + 100);
+                var heig = $("#details").height()+ 320;
+                $(window.parent.document).find("#blog_").attr("height",heig);
             }else{
                 alert(res.result);
             }
@@ -21,54 +26,64 @@ window.onload = function() {
         }
     });
     //加载评论
-    // $.ajax({
-    //     type: "post",
-    //     url: "http://localhost:8888/words/getWords",
-    //     data: {
-    //         articleId: 1
-    //     },
-    //     success: function(res){
-    //         if(!res.error){
-    //             for(let i=0;i<res.result.length;i++) {
-    //                 let div1 = document.createElement('div');
-    //                 let i = document.createElement('i');
-    //                 let div2 = document.createElement('div');
-    //                 let p = document.createElement('p');
-    //                 let div3 = document.createElement('div');
-    //                 let span1 = document.createElement('span');
-    //                 let span2 = document.createElement('span');
-    //                 div1.className = 'person_words';
-    //                 div2.className = 'person_content';
-    //                 p.innerHTML = res.result[i].wordsContent;
-    //                 span1.innerHTML = res.result[i].wordsTime;
-    //                 span2.innerHTML = res.result[i].wordsName;
-    //                 div3.appendChild(span1);
-    //                 div3.appendChild(span2);
-    //                 div2.appendChild(p);
-    //                 div2.appendChild(div3);
-    //                 div1.appendChild(i);
-    //                 div1.appendChild(div2);
-    //                 if(res.result[i].wordsReply){
-    //                     let hr = document.createElement('hr');
-    //                     let div4 = document.createElement('div');
-    //                     div4.className = 'person_reply';
-    //                     let span3 = document.createElement('span');
-    //                     let span4 = document.createElement('span');
-    //                     div4.appendChild(span3);
-    //                     div4.appendChild(span4);
-    //                     div1.appendChild(hr);
-    //                     div1.appendChild(div4);
-    //                 }
-    //                 document.getElementById('words_content').appendChild(div1);
-    //             }
-    //         }else{
-    //             alert(res.result);
-    //         }
-    //     },
-    //     error: function(res){
-    //         alert("加载失败"+JSON.stringify(res));
-    //     }
-    // });
+    $.ajax({
+        type: "post",
+        url: "http://47.94.97.26:8888/article/getwords",
+        data: {
+            id: sessionStorage.getItem("article_id")
+        },
+        success: function(res){
+            if(!res.error){
+                var j=0;
+                if(res.result) {
+                    while(j<res.result.length) {
+                        let div1 = document.createElement('div');
+                        let i = document.createElement('i');
+                        let div2 = document.createElement('div');
+                        let p = document.createElement('p');
+                        let div3 = document.createElement('div');
+                        let span1 = document.createElement('span');
+                        let span2 = document.createElement('span');
+                        div1.className = 'person_words';
+                        div2.className = 'person_content';
+                        p.innerHTML = res.result[j].wordsContent;
+                        span1.innerHTML = res.result[j].wordsTime.split('T')[0];
+                        span2.innerHTML = res.result[j].wordsPersonName;
+                        div3.appendChild(span1);
+                        div3.appendChild(span2);
+                        div2.appendChild(p);
+                        div2.appendChild(div3);
+                        div1.appendChild(i);
+                        div1.appendChild(div2);
+                        if (res.result[j].wordsReply) {
+                            let hr = document.createElement('hr');
+                            let div4 = document.createElement('div');
+                            div4.className = 'person_reply';
+                            let span3 = document.createElement('span');
+                            let span4 = document.createElement('span');
+                            span3.innerHTML = '作者回复:';
+                            span4.innerHTML = res.result[j].wordsReply;
+                            div4.appendChild(span3);
+                            div4.appendChild(span4);
+                            div2.appendChild(hr);
+                            div2.appendChild(div4);
+                        }
+                        document.getElementById('words_content').appendChild(div1);
+                        j++;
+                    }
+                }
+                // alert($("#words_content").height());
+                $("#words").height($('#words_content').height()+270);
+                $("#details").height($("#words_content").height() + $(".article").height()+200);
+                var heig = $("#details").height()+ 320;
+                $(window.parent.document).find("#blog_").attr("height",heig);
+            }else{
+            }
+        },
+        error: function(res){
+            alert("加载失败"+JSON.stringify(res));
+        }
+    });
 
     //提交评论
     const publish = document.getElementById('publish');
@@ -80,22 +95,21 @@ window.onload = function() {
             let strResult = str.replace(imgReg,'emoji_'); //替换后的字符串
             let arrImg = str.match(imgReg); // arr为包含所有img标签的数组
             let srcArr = [];
-            for (let i = 0; i < arrImg.length; i++) {
-                let src = arrImg[i].match(srcReg);
-                srcArr[i] = src[1];
-            }
+            // for (let i = 0; i < arrImg.length; i++) {
+            //     let src = arrImg[i].match(srcReg);
+            //     srcArr[i] = src[1];
+            // }
             // strResult：存放的替换后的字符串
             // srcArr[i]：存放所有的src
-            // console.log(arr);
+            // console.log(strResult);
             // for(i=0;i<arrImg.length;i++)
             //     console.log(srcArr[i]);
             $.ajax({
                 type: "post",
-                url: "http://localhost:8888/words/addwords",
+                url: "http://47.94.97.26:8888/words/addarticlewords",
                 data: {
                     wordsId: user_id,
-                    articleId: 1,
-                    articleName: document.getElementById('wordsName'),
+                    articleId: sessionStorage.getItem("article_id"),
                     wordsContent: strResult
                 },
                 success: function(res){
@@ -119,6 +133,8 @@ window.onload = function() {
                         div1.appendChild(i);
                         div1.appendChild(div2);
                         document.getElementById('words_content').appendChild(div1);
+                        location.reload();
+                        $("#words").height($("#words_content").height()+270);
                     }else{
                         alert(res.result);
                     }
@@ -129,24 +145,31 @@ window.onload = function() {
             });
         }else{ //表示是第一次登陆，所以需要将err框显示
             // console.log(logo);
+            $("#words").height($('#words_content').height()+490);
+            $("#details").height($("#words_content").height() + $(".article").height()+420);
             document.getElementById('words_ifon').style.display = 'block';
+
         }
     };
     //提交信息
     const commit =  document.getElementById('commit');
     commit.onclick = function(){
+        // console.log(document.getElementById('wordsName').value);
         $.ajax({
             type: "post",
-            url: "http://localhost:8888/words/adduser",
+            url: "http://47.94.97.26:8888/words/adduser",
             data: {
-                wordsName: document.getElementById('wordsName'),
-                wordsEmail: document.getElementById('wordsEmail')
+                wordsName: document.getElementById('wordsName').value,
+                wordsEmail: document.getElementById('wordsEmail').value
             },
             success: function(res){
                 if(!res.error){
-                    user_id = res.result[0].wordsId;
+                    user_id = res.result[0].wordsPersonId;
+                    $("#words").height($('#words_content').height()+270);
+                    $("#details").height($("#words_content").height() + $(".article").height()+200);
                     document.getElementById('words_ifon').style.display = 'none';
                     logo = true;
+                    // alert(user_id);
                 }else{
                     alert(res.result);
                 }
@@ -218,7 +241,7 @@ setTimeout(function() {
                     sel.addRange(range);
                 }
             }
-        } else if(document.selection && document.selection.type != "Control") {
+        } else if(document.selection && document.selection.type !== "Control") {
             // IE < 9
             document.selection.createRange().pasteHTML(html);
         }

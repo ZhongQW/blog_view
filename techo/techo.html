@@ -10,33 +10,10 @@
 </head>
 <body>
 <div id="essay">
-    <ul>
-        <li class="li_">
-             <i class="fa fa-envira" aria-hidden="true"></i>
-            <p>关于前端那些事儿</p>
-            <div class="content_">
-                <div class="img_wrap">
-                    <img src="../img/essay.jpg" />
-                </div>
-                <div class="ess">
-                    最近博客的多说评论总是抽风，先来吐槽一下。 刚在整理评论的时候吓我一跳，之前我的好多评论都没了，是的，是只有我自己的评论没有了，而其它人的评论还有。摸不着头脑的我打开多说后台管理，哦天，我之前所有的评论和回复全部自动转为垃圾评论了，八百多条啊，废了一会功夫好不容易批量还原了。结果...
-                </div>
-                <div class="bottom">
-                    <i class="fa fa-user-o" aria-hidden="true"></i>
-                    <span>zhongqw</span>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    <span>2018-9-19</span>
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <span>浏览量(0)</span>
-                    <i class="fa fa-comment-o" aria-hidden="true"></i>
-                    <span>评论(0)</span>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>                    <span>喜欢(0)</span>
-                </div>
-            </div>
-        </li>
-        <li class="li_">
+    <ul id="article_title">
+<!--        <li class="li_ data-index=""">
             <i class="fa fa-envira" aria-hidden="true"></i>
-            <p>关于前端那些事儿</p>
+            <p onclick="handleClick()">关于前端那些事儿</p>
             <div class="content_">
                 <div class="img_wrap">
                     <img src="../img/essay.jpg" />
@@ -56,76 +33,7 @@
                     <i class="fa fa-heart-o" aria-hidden="true"></i>                    <span>喜欢(0)</span>
                 </div>
             </div>
-        </li>
-        <li class="li_">
-             <i class="fa fa-envira" aria-hidden="true"></i>
-            <p>关于前端那些事儿</p>
-            <div class="content_">
-                <div class="img_wrap">
-                    <img src="../img/essay.jpg" />
-                </div>
-                <div class="ess">
-                    最近博客的多说评论总是抽风，先来吐槽一下。 刚在整理评论的时候吓我一跳，之前我的好多评论都没了，是的，是只有我自己的评论没有了，而其它人的评论还有。摸不着头脑的我打开多说后台管理，哦天，我之前所有的评论和回复全部自动转为垃圾评论了，八百多条啊，废了一会功夫好不容易批量还原了。结果...
-                </div>
-                <div class="bottom">
-                    <i class="fa fa-user-o" aria-hidden="true"></i>
-                    <span>zhongqw</span>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    <span>2018-9-19</span>
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <span>浏览量(0)</span>
-                    <i class="fa fa-comment-o" aria-hidden="true"></i>
-                    <span>评论(0)</span>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>                    <span>喜欢(0)</span>
-                </div>
-            </div>
-        </li>
-        <li class="li_">
-             <i class="fa fa-envira" aria-hidden="true"></i>
-            <p>关于前端那些事儿</p>
-            <div class="content_">
-                <div class="img_wrap">
-                    <img src="../img/essay.jpg" />
-                </div>
-                <div class="ess">
-                    最近博客的多说评论总是抽风，先来吐槽一下。 刚在整理评论的时候吓我一跳，之前我的好多评论都没了，是的，是只有我自己的评论没有了，而其它人的评论还有。摸不着头脑的我打开多说后台管理，哦天，我之前所有的评论和回复全部自动转为垃圾评论了，八百多条啊，废了一会功夫好不容易批量还原了。结果...
-                </div>
-                <div class="bottom">
-                    <i class="fa fa-user-o" aria-hidden="true"></i>
-                    <span>zhongqw</span>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    <span>2018-9-19</span>
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <span>浏览量(0)</span>
-                    <i class="fa fa-comment-o" aria-hidden="true"></i>
-                    <span>评论(0)</span>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>                    <span>喜欢(0)</span>
-                </div>
-            </div>
-        </li>
-        <li class="li_">
-             <i class="fa fa-envira" aria-hidden="true"></i>
-            <p>关于前端那些事儿</p>
-            <div class="content_">
-                <div class="img_wrap">
-                    <img src="../img/essay.jpg" />
-                </div>
-                <div class="ess">
-                    最近博客的多说评论总是抽风，先来吐槽一下。 刚在整理评论的时候吓我一跳，之前我的好多评论都没了，是的，是只有我自己的评论没有了，而其它人的评论还有。摸不着头脑的我打开多说后台管理，哦天，我之前所有的评论和回复全部自动转为垃圾评论了，八百多条啊，废了一会功夫好不容易批量还原了。结果...
-                </div>
-                <div class="bottom">
-                    <i class="fa fa-user-o" aria-hidden="true"></i>
-                    <span>zhongqw</span>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    <span>2018-9-19</span>
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <span>浏览量(0)</span>
-                    <i class="fa fa-comment-o" aria-hidden="true"></i>
-                    <span>评论(0)</span>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>                    <span>喜欢(0)</span>
-                </div>
-            </div>
-        </li>
+        </li>-->
     </ul>
     <div id="page">
         <span class="font_">第</span>

@@ -4,6 +4,9 @@
 }
 body{
 }
+#essay{
+    height: 1040px;
+}
 li{
     list-style: none;
 }

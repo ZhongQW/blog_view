@@ -8,11 +8,17 @@ body{
 span{
     color: #999999;
 }
+#details{
+    height: auto;
+    width: 100%;
+}
 .article{
     background: rgba(255,255,255,0.5);
     width: 900px;
     border-radius: 10px;
     margin: 10px auto 10px auto;
+    /*border: red 1px solid;*/
+    height: 1000px;
 }
 #nav{
     /*border: red 1px solid;*/
@@ -84,9 +90,10 @@ span{
     position: relative;
     background: rgba(255,255,255,0.5);
     width: 900px;
-    height: auto;
+    height: 1000px;
     border-radius: 10px;
     margin: 10px auto 10px auto;
+    /*border: red solid 1px;*/
 }
 #words_my{
     padding: 15px;
@@ -172,6 +179,7 @@ div.newpost {
     padding: 10px;
     border-radius: 5px;
     display: none;
+    transition: 2s;
 }
 .care{
     margin-bottom: 30px;
@@ -228,17 +236,20 @@ div.newpost {
     margin-left: 10px;
 }
 #words_content{
-    height: 400px;
+    height: auto;
     width: 98%;
+    /*border: #DA448E 1px solid;*/
     /*border: #DA448E 1px solid;*/
     padding: 30px 10px 10px 10px;
 }
 .person_words{
+    /*border: red 1px solid;*/
+    padding-top: 10px;
     margin-left: 20px;
 }
 .person_content{
     background: rgba(255,255,255,0.6);
-    width: 720px;
+    width: 740px;
     height: auto;
     margin-left: 20px;
     border: #EEEEEE solid 1px;
@@ -250,7 +261,8 @@ div.newpost {
     content: url("./img/头像.png");
 }
 .person_content div:nth-child(2 ){
-    margin-left: 520px;
+    margin-left: 580px;
+    /*border: red 1px solid;*/
 }
 .person_content hr{
     margin-top: 10px;

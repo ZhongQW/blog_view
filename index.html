@@ -7,6 +7,16 @@
     <script src="public/index.js"></script>
     <script src="public/js/tween.js"></script>
     <link rel="icon" href="./img/title.png" type="image/x-icon"/>
+    <script type="text/javascript" language="javascript">
+        function iFrameHeight() {
+            let ifm= document.getElementById("blog_");
+            let subWeb = document.frames ? document.frames["blog_"].document : ifm.contentDocument;
+            if(ifm != null && subWeb != null) {
+                ifm.height = subWeb.body.scrollHeight;
+                ifm.width = subWeb.body.scrollWidth;
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="bg">
@@ -26,9 +36,8 @@
         </div>
     </div>
     <!--中间具体内容-->
-    <div class="content_">
-        <iframe id="blog_"  name="blog_" src="./主页/main.html"></iframe>
-    </div>
+    <iframe src="./主页/main.html" name="blog_" id="blog_" frameborder="0" scrolling="no"
+            marginheight="0" marginwidth="0" width="100%" onLoad="iFrameHeight()"></iframe>
 
 </div>
 <div id="snowMask"></div>

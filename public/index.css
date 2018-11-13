@@ -2,6 +2,7 @@ body {
     color: white;
     font-size: 12px;
     overflow-x:hidden;
+    overflow-y: auto;
 }
 *{
     padding: 0;
@@ -20,7 +21,7 @@ li{
 .bg {
     background: #E8DFD8 url(../img/top.jpg) 50% top scroll no-repeat;
     width: auto;
-    height: auto;
+    /*height: 700px;*/
 }
 
 /*雪花飘落*/
@@ -100,19 +101,5 @@ li{
     font-weight: bold;
 }
 
-/*中间内容*/
-.content_{
-    width: 100%;
-    /*border: black 1px solid;*/
-    height: 1300px;
 
-}
-#blog_{
-    border: none;
-    width: 100%;
-    padding: 0;
-    overflow: hidden;
-    height:1300px;
-    /*border: #333333 solid 1px;*/
-}
 

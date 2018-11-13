@@ -5,6 +5,43 @@
     Time: 17:40
 */
 window.onload = function() {
+
+    //加载留言
+    $.ajax({
+        type: "post",
+        url: "http://47.94.97.26:8888/words/getblogwords",
+        data: {
+        },
+        success: function(res){
+            if(!res.error){
+                for(let j=0;j<res.result.length;j++){
+                    let reply = '';
+                    if(res.result[j].wordsReply)
+                        reply = "                <div class=\"reply text\">\n" +
+                            "                    <span class=\"wordsName\">作者回复：</span>\n" +
+                            "                    <span class=\"reply\">"+ res.result[j].wordsReply +"</span>\n" +
+                            "                </div>";
+                    let str = "        <li>\n" +
+                        "            <div class=\"box\">\n" +
+                        "                <div class=\"pic\"></div>\n" +
+                        "                <div class=\"ico\"></div>\n" +
+                        "                <div class=\"content text\">\n" +
+                        "                    <span class=\"wordsName\">"+ res.result[j].wordsPersonName +"留：</span>\n" +
+                        "                    <span class=\"content\">"+ res.result[j].wordsContent +"</span>\n" +
+                        "                    <span class=\"wordsTime\">"+ res.result[j].wordsTime +"留言</span>\n" +
+                        "                </div>"+ reply +"</div></li>";
+                    $("#messageList").append(str);
+                }
+                $("#messageList").height($("#words_content").height()+270);
+            }else{
+                alert(res.result);
+            }
+        },
+        error: function(res){
+            alert("加载失败"+JSON.stringify(res));
+        }
+    });
+
     var face = document.getElementById('face');
     var emoji =  document.getElementById('emoji');
     for(var i = 1; i < 76; i++) {
