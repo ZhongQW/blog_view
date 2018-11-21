@@ -5,11 +5,11 @@
     Time: 17:40
 */
 window.onload = function() {
-
+    var logo = false;
     //加载留言
     $.ajax({
         type: "post",
-        url: "http://47.94.97.26:8888/words/getblogwords",
+        url: "http://localhost:8888/words/getblogwords",
         data: {
         },
         success: function(res){
@@ -42,6 +42,96 @@ window.onload = function() {
         }
     });
 
+
+    //提交评论
+    const publish = document.getElementById('publish');
+    publish.onclick = function(){
+        if(logo){ //表示不是第一次登陆，所以直接将发言内容送到后台
+            let str = document.getElementById('emojiInput').innerHTML;
+            let imgReg = /<img.*?(?:>|\/>)/gi;
+            let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+            let strResult = str.replace(imgReg,'emoji_'); //替换后的字符串
+            let arrImg = str.match(imgReg); // arr为包含所有img标签的数组
+            let srcArr = [];
+            // for (let i = 0; i < arrImg.length; i++) {
+            //     let src = arrImg[i].match(srcReg);
+            //     srcArr[i] = src[1];
+            // }
+            // strResult：存放的替换后的字符串
+            // srcArr[i]：存放所有的src
+            // console.log(strResult);
+            // for(i=0;i<arrImg.length;i++)
+            //     console.log(srcArr[i]);
+            console.log(user_id);
+            console.log(strResult);
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8888/words/addblogwords",
+                data: {
+                    user_id: user_id,
+                    wordsContent: strResult
+                },
+                success: function(res){
+                    if(!res.error){
+                        let str = "        <li>\n" +
+                            "            <div class=\"box\">\n" +
+                            "                <div class=\"pic\"></div>\n" +
+                            "                <div class=\"ico\"></div>\n" +
+                            "                <div class=\"content text\">\n" +
+                            "                    <span class=\"wordsName\">"+ document.getElementById('wordsName').value +"</span>\n" +
+                            "                    <span class=\"content\">"+ document.getElementById('wordsEmail').value +"</span>\n" +
+                            "                    <span class=\"wordsTime\">"+ new Date().toLocaleDateString() +"留言</span>\n" +
+                            "                </div>\n" +
+                            "            </div>\n" +
+                            "        </li>";
+                        document.getElementById('messageList').append(str);
+                        location.reload();
+                    }else{
+                        alert(res.result);
+                    }
+                },
+                error: function(res){
+                    alert("加载失败"+JSON.stringify(res));
+                }
+            });
+        }else{ //表示是第一次登陆，所以需要将err框显示
+            // console.log(logo);
+           document.getElementById('words_ifon').style.display = 'block';
+
+        }
+    };
+    //提交信息
+    const commit =  document.getElementById('commit');
+    commit.onclick = function(){
+        // console.log(document.getElementById('wordsName').value);
+        $.ajax({
+            type: "post",
+            url: "http://localhost:8888/words/adduser",
+            data: {
+                wordsName: document.getElementById('wordsName').value,
+                wordsEmail: document.getElementById('wordsEmail').value
+            },
+            success: function(res){
+                if(!res.error){
+                    user_id = res.result[0].wordsPersonId;
+                    $("#words").height($('#words_content').height()+270);
+                    $("#details").height($("#words_content").height() + $(".article").height()+200);
+                    document.getElementById('words_ifon').style.display = 'none';
+                    logo = true;
+                    // alert(user_id);
+                }else{
+                    alert(res.result);
+                }
+            },
+            error: function(res){
+                alert("加载失败"+JSON.stringify(res));
+            }
+        });
+    };
+
+
+
+    //插入表情
     var face = document.getElementById('face');
     var emoji =  document.getElementById('emoji');
     for(var i = 1; i < 76; i++) {

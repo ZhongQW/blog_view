@@ -22,7 +22,7 @@ p{
     font-size: 24px;
 }
 .li_>i:after{
-    content: "java";
+    content: attr(data-content);
     color: #45b97c;
     font-size: 17px;
     font-weight: bold;

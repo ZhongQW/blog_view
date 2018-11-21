@@ -1,7 +1,13 @@
+function handleClick(e){
+    console.log(e.currentTarget.attributes["data-index"].nodeValue);
+    sessionStorage.setItem('article_id',e.currentTarget.attributes["data-index"].nodeValue);
+    window.location.href = "../articleDetails/details.html";
+}
 window.onload = function(){
+    //获取个人信息
     $.ajax({
         type: "post",
-        url: "http://47.94.97.26:8888/owner/get",
+        url: "http://localhost:8888/owner/get",
         data: {
 
         },
@@ -36,16 +42,56 @@ window.onload = function(){
         }
     });
 
-    /*鼠标触摸事件*/
-    let article = document.getElementsByClassName('art_1');
-    for(let i=0;i<article.length;i++){
-        article[i].onmouseover = function(){
-            this.getElementsByClassName('clubs')[0].style.left = '500px';
-        };
-        article[i].onmouseout = function(){
-            this.getElementsByClassName('clubs')[0].style.left = '560px';
+    //获取精选文章
+    $.ajax({
+        type: "post",
+        url: "http://localhost:8888/article/getgoodarticle",
+        data: {
+
+        },
+        success: function(res){
+            if(!res.error){
+                console.log(res.result);
+                for(var j = 0;j<=1;j++) {
+                    let content = res.result[j].articleContent;
+                    content = content.substring(0, 300);
+                    content = content+'...';
+                    var str = " <div class=\"art_1\">\n" +
+                        "            <p data-index = \""+ res.result[j].articleId +"\" onclick=\"handleClick(event)\" class=\"title_1\">"+ res.result[j].articleTitle +"</p>\n" +
+                        "            <img src=\"../img/blogbgs.png\" class=\"clubs\" />\n" +
+                        "            <div class=\"essay\">"+ content +"</div>\n" +
+                        "            <img src=\"../img/goodarticle1.jpg\" class=\"inset\" />\n" +
+                        "            <div class=\"art_footer\">\n" +
+                        "                <ul>\n" +
+                        "                    <li>2018-9-4</li>\n" +
+                        "                    <li>访问量(121)</li>\n" +
+                        "                    <li>喜欢(43)</li>\n" +
+                        "                    <li>阅读(229)</li>\n" +
+                        "                    <li>评论(123)</li>\n" +
+                        "                </ul>\n" +
+                        "            </div>\n" +
+                        "        </div>";
+                    $(".articleD").append(str);
+                    /*鼠标触摸事件*/
+                    let article = document.getElementsByClassName('art_1');
+                    for(let i=0;i<article.length;i++){
+                        article[i].onmouseover = function(){
+                            this.getElementsByClassName('clubs')[0].style.left = '500px';
+                        };
+                        article[i].onmouseout = function(){
+                            this.getElementsByClassName('clubs')[0].style.left = '560px';
+                        }
+                    }
+                    $(window.parent.document).find("#blog_").attr("height",1300);
+                }
+            }else{
+                alert(res.result);
+            }
+        },
+        error: function(res){
+            alert("加载失败"+JSON.stringify(res));
         }
-    }
+    });
 
     /*琴弦文字*/
     var oList = document.getElementById('list');

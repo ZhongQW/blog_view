@@ -1,10 +1,18 @@
 window.onload = function() {
+    var storage=window.localStorage;
+    // storage.removeItem("user");
+    if(storage.user == 'true'){
+        // alert('yes');
+    }
+    else{
+        storage.user = false;
+    }
     var logo = false;
     var user_id;
     //加载文章
     $.ajax({
         type: "post",
-        url: "http://47.94.97.26:8888/article/getonetext",
+        url: "http://localhost:8888/article/getonetext",
         data: {
             id: sessionStorage.getItem("article_id")
         },
@@ -28,7 +36,7 @@ window.onload = function() {
     //加载评论
     $.ajax({
         type: "post",
-        url: "http://47.94.97.26:8888/article/getwords",
+        url: "http://localhost:8888/article/getwords",
         data: {
             id: sessionStorage.getItem("article_id")
         },
@@ -88,7 +96,8 @@ window.onload = function() {
     //提交评论
     const publish = document.getElementById('publish');
     publish.onclick = function(){
-        if(logo){ //表示不是第一次登陆，所以直接将发言内容送到后台
+        // console.log(storage.getItem('user')+storage.user_id);
+        if(storage.getItem('user')=="true"){ //表示不是第一次登陆，所以直接将发言内容送到后台
             let str = document.getElementById('emojiInput').innerHTML;
             let imgReg = /<img.*?(?:>|\/>)/gi;
             let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
@@ -106,9 +115,9 @@ window.onload = function() {
             //     console.log(srcArr[i]);
             $.ajax({
                 type: "post",
-                url: "http://47.94.97.26:8888/words/addarticlewords",
+                url: "http://localhost:8888/words/addarticlewords",
                 data: {
-                    wordsId: user_id,
+                    wordsId: storage.user_id,
                     articleId: sessionStorage.getItem("article_id"),
                     wordsContent: strResult
                 },
@@ -157,7 +166,7 @@ window.onload = function() {
         // console.log(document.getElementById('wordsName').value);
         $.ajax({
             type: "post",
-            url: "http://47.94.97.26:8888/words/adduser",
+            url: "http://localhost:8888/words/adduser",
             data: {
                 wordsName: document.getElementById('wordsName').value,
                 wordsEmail: document.getElementById('wordsEmail').value
@@ -168,8 +177,10 @@ window.onload = function() {
                     $("#words").height($('#words_content').height()+270);
                     $("#details").height($("#words_content").height() + $(".article").height()+200);
                     document.getElementById('words_ifon').style.display = 'none';
+                    storage['user'] = 'true';
+                    storage['user_id'] = user_id;
                     logo = true;
-                    // alert(user_id);
+                    // console.log(user_id);
                 }else{
                     alert(res.result);
                 }

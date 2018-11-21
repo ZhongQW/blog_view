@@ -25,7 +25,7 @@ p{
     font-size: 24px;
 }
 .li_>i:after{
-    content: "essay";
+    content: attr(data-content);
     color: #fcaf17;
     font-size: 15px;
     font-weight: bold;
