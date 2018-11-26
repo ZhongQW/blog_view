@@ -37,12 +37,13 @@ window.onload = function(){
                         "                    <i class=\"fa fa-user-o\" aria-hidden=\"true\"></i>\n" +
                         "                    <span>zhongqw</span>\n" +
                         "                    <i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i>\n" +
-                        "                    <span>2018-9-19</span>\n" +
+                        "                    <span>"+ res.result[j].articleTime.split('T')[0] +"</span>\n" +
                         "                    <i class=\"fa fa-eye\" aria-hidden=\"true\"></i>\n" +
-                        "                    <span>浏览量(0)</span>\n" +
+                        "                    <span>浏览量("+ res.result[j].articleVisit +")</span>\n" +
                         "                    <i class=\"fa fa-comment-o\" aria-hidden=\"true\"></i>\n" +
-                        "                    <span>评论(0)</span>\n" +
-                        "                    <i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i>                    <span>喜欢(0)</span>\n" +
+                        "                    <span>评论("+ res.result[j].articleWordsAmount +")</span>\n" +
+                        "                    <i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i> \n" +
+                        "                   <span>喜欢("+ res.result[j].articleLover +")</span>\n" +
                         "                </div>\n" +
                         "            </div>\n" +
                         "        </li>";

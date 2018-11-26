@@ -65,9 +65,11 @@ span{
 }
 #aside_nav i:hover{
     color: #DA448E;
+    cursor: pointer;
 }
 #aside_nav span:hover{
     color: cadetblue;
+    cursor: pointer;
 }
 .hr{
     margin-top: 10px;
@@ -299,4 +301,37 @@ div.newpost {
 }
 #commit:hover{
     background-color: #3c8a61f2;
+}
+
+#btn_top{
+    position: fixed;
+    top: 300px;
+    left: 1200px;
+    width: 40px;
+    height: 100px;
+    border: solid 1px #CACAC9;
+    background-color: #eeeeee;
+    border-radius: 4px;
+}
+#btn_top ul{
+    list-style: none;
+}
+#btn_top ul li hr{
+    color: #eeeeee;
+}
+#btn_top ul li i{
+    font-size: 30px;
+    color: #999999;
+}
+#btn_top ul li{
+    text-align: center;
+}
+#btn_top ul li:nth-child(3){
+    margin-top: 10px;
+}
+#btn_top ul li:nth-child(1){
+    margin-top: -2px;
+}
+#btn_top ul li:nth-child(1) i{
+    font-size: 50px;
 }

@@ -18,6 +18,19 @@ window.onload = function() {
         },
         success: function(res){
             if(!res.error){
+                console.log(res.result);
+                var navstr = "            <i class=\"fa fa-user-o\" aria-hidden=\"true\"></i>\n" +
+                    "            <span>zhongqw</span>\n" +
+                    "            <i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i>\n" +
+                    "            <span>"+ res.result[0].articleTime.split('T')[0] +"</span>\n" +
+                    "            <i class=\"fa fa-eye\" aria-hidden=\"true\"></i>\n" +
+                    "            <span>浏览量("+ res.result[0].articleVisit +")</span>\n" +
+                    "            <i class=\"fa fa-comment-o\" aria-hidden=\"true\"></i>\n" +
+                    "            <span>评论("+ res.result[0].articleWordsAmount +")</span>\n" +
+                    "            <i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i>\n" +
+                    "            <span>喜欢("+ res.result[0].articleLover +")</span>";
+                $('#aside_nav').append(navstr);
+                console.log(res.result.articleTime);
                 $('#content').html(res.result[0].articleContent);
                 $('#article_name').html(res.result[0].articleTitle);
                 // alert($('#content').height());
@@ -191,6 +204,25 @@ window.onload = function() {
         });
     };
 
+    //ifream页面内部随着外部的滚动而改变top
+    $(parent.window).scroll(function(){//外部窗口滚动时，把需要固定的元素的top值跟随改变;
+        $('#btn_top').css({
+            top : $(parent.window).scrollTop()+300
+        });
+    });
+    //返回顶部和喜欢
+    $("#topB").click(function(){
+        console.log($('body,html'));
+        // $('body,html').animate({scrollTop:0},1000);
+        // iframe.contentWindow.window.scrollTo(0,0);
+        parent.scrollTo(0,0);
+    });
+    $('#loveB').click(function(e){
+        console.log(e.target);
+        e.target.setAttribute('class',"fa fa-heart");
+        e.target.style.color = '#FF69B4';
+    });
+
 
     //生成表情
     var face = document.getElementById('face');
@@ -210,7 +242,7 @@ window.onload = function() {
     };
     emoji.onclick = function(){
         face.style.display = 'block';
-    }
+    };
 };
 
 //点击插入表情

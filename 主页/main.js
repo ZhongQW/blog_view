@@ -51,11 +51,14 @@ window.onload = function(){
         },
         success: function(res){
             if(!res.error){
-                console.log(res.result);
+                console.log(res.result[0]);
                 for(var j = 0;j<=1;j++) {
                     let content = res.result[j].articleContent;
-                    content = content.substring(0, 300);
+                    var dd=content.replace(/<[^>]+>/g,"");//截取html标签
+                    var dds=dd.replace(/&nbsp;/ig,"");//截取空格等特殊标签
+                    content = dds.substring(0, 200);
                     content = content+'...';
+                    var time = res.result[j].articleTime.split('T')[0];
                     var str = " <div class=\"art_1\">\n" +
                         "            <p data-index = \""+ res.result[j].articleId +"\" onclick=\"handleClick(event)\" class=\"title_1\">"+ res.result[j].articleTitle +"</p>\n" +
                         "            <img src=\"../img/blogbgs.png\" class=\"clubs\" />\n" +
@@ -63,11 +66,10 @@ window.onload = function(){
                         "            <img src=\"../img/goodarticle1.jpg\" class=\"inset\" />\n" +
                         "            <div class=\"art_footer\">\n" +
                         "                <ul>\n" +
-                        "                    <li>2018-9-4</li>\n" +
-                        "                    <li>访问量(121)</li>\n" +
-                        "                    <li>喜欢(43)</li>\n" +
-                        "                    <li>阅读(229)</li>\n" +
-                        "                    <li>评论(123)</li>\n" +
+                        "                    <li>"+ time +"</li>\n" +
+                        "                    <li>访问量(" + res.result[j].articleVisit + ")</li>\n" +
+                        "                    <li>喜欢(" + res.result[j].articleLover + ")</li>\n" +
+                        "                    <li>评论(" + res.result[j].articleWordsAmount + ")</li>\n" +
                         "                </ul>\n" +
                         "            </div>\n" +
                         "        </div>";
@@ -93,62 +95,86 @@ window.onload = function(){
         }
     });
 
-    /*琴弦文字*/
-    var oList = document.getElementById('list');
-    var oLis = oList.getElementsByTagName('li');
-    var aLiHeight = oLis[0].offsetHeight;
-    for(var i=0;i<oLis.length;i++)
-    {
-        var sHtml = oLis[i].innerHTML;
-        oLis[i].innerHTML = "";
-        for(var j=0;j<sHtml.length;j++)
-        {
-            //将每一个文字都变为<span>文字</span>
-            oLis[i].innerHTML += "<span>"+sHtml[j]+"</span>"
-        }
-        var aSpan = oLis[i].childNodes;
-        for(var j=0;j<aSpan.length;j++)
-        {
-            aSpan[j].style.left = aSpan[j].offsetLeft+"px";
-            aSpan[j].style.top = aSpan[j].offsetTop+"px";
-            aSpan[j].startTop = aSpan[j].offsetTop;
-        }
-        for(var j=0;j<aSpan.length;j++)
-        {
-            aSpan[j].style.position = "absolute";
-            (function(aSpan,num2){
-                var iStart = 0;//元素起始位置
-                var aSpanHeight = aSpan[0].offsetHeight;
-                aSpan[num2].onmouseover = function(e)
+    //获取最近的七篇文章
+    $.ajax({
+        type: "post",
+        url: "http://localhost:8888/article/getrecentlyarticle",
+        data: {
+
+        },
+        success: function(res){
+            if(!res.error){
+                let oTitle = "";
+                for(let i=0;i<res.result.length;i++){
+                    oTitle = oTitle +" <li data-index = \""+ res.result[i].articleId +"\" onclick=\"handleClick(event)\" >"+ res.result[i].articleTitle.substring(0, 15) +"</li>";
+                }
+                $('#list').append(oTitle);
+
+                /*琴弦文字*/
+                var oList = document.getElementById('list');
+                var oLis = oList.getElementsByTagName('li');
+                var aLiHeight = oLis[0].offsetHeight;
+                for(var i=0;i<oLis.length;i++)
                 {
-                    iStart = e.clientY; // span 的初始位置
-                };
-                aSpan[num2].onmousemove = function(e)
-                {
-                    var iDis = e.clientY - iStart; //需要移动的距离：鼠标移动和初始值的差
-                    var iNum = iDis>0?1:-1;//小于0时，表示向上移动；大于0时，向下移动
-                    var moveY = this.startTop + iDis; //当前距离 li 顶部的距离：移动的距离 + 距离 li 顶部的距离，当向上移动时为负，向下移动时为正
-                    var moveYDist2 = aLiHeight - aSpanHeight; // 除去 span 的高度，li 的高度 - span 的高度
-                    if(moveY >= 0 && moveY < moveYDist2 ) { //span距离li的距离不能小于0，span距离li
-                        for(var j=0;j<aSpan.length;j++) {
-                            if (Math.abs(iDis) > Math.abs(num2 - j)) { //当第j个元素与第num2的位置相差 < iDist时，便移动
-                                aSpan[j].style.top = aSpan[j].startTop + (Math.abs(iDis) - Math.abs(num2 - j)) * iNum + "px";
-                            }else{ //当第j个元素与第num2的位置相差 > iDist时，便不再移动，让元素保持最初状态
-                                aSpan[j].style.top = aSpan[j].startTop + "px";
-                            }
-                        }
+                    var sHtml = oLis[i].innerHTML;
+                    oLis[i].innerHTML = "";
+                    for(var j=0;j<sHtml.length;j++)
+                    {
+                        //将每一个文字都变为<span>文字</span>
+                        oLis[i].innerHTML += "<span>"+sHtml[j]+"</span>"
                     }
-                };
-                aSpan[num2].onmouseout = function(e)
-                {
-                    // this.style.top = this.startTop + "px";//初始位置 + 差值
-                    for(var j=0;j<aSpan.length;j++){
-                        starMove(aSpan[j],{top:aSpan[j].startTop},500,"elasticOut");
+                    var aSpan = oLis[i].childNodes;
+                    for(var j=0;j<aSpan.length;j++)
+                    {
+                        aSpan[j].style.left = aSpan[j].offsetLeft+"px";
+                        aSpan[j].style.top = aSpan[j].offsetTop+"px";
+                        aSpan[j].startTop = aSpan[j].offsetTop;
+                    }
+                    for(var j=0;j<aSpan.length;j++)
+                    {
+                        aSpan[j].style.position = "absolute";
+                        (function(aSpan,num2){
+                            var iStart = 0;//元素起始位置
+                            var aSpanHeight = aSpan[0].offsetHeight;
+                            aSpan[num2].onmouseover = function(e)
+                            {
+                                iStart = e.clientY; // span 的初始位置
+                            };
+                            aSpan[num2].onmousemove = function(e)
+                            {
+                                var iDis = e.clientY - iStart; //需要移动的距离：鼠标移动和初始值的差
+                                var iNum = iDis>0?1:-1;//小于0时，表示向上移动；大于0时，向下移动
+                                var moveY = this.startTop + iDis; //当前距离 li 顶部的距离：移动的距离 + 距离 li 顶部的距离，当向上移动时为负，向下移动时为正
+                                var moveYDist2 = aLiHeight - aSpanHeight; // 除去 span 的高度，li 的高度 - span 的高度
+                                if(moveY >= 0 && moveY < moveYDist2 ) { //span距离li的距离不能小于0，span距离li
+                                    for(var j=0;j<aSpan.length;j++) {
+                                        if (Math.abs(iDis) > Math.abs(num2 - j)) { //当第j个元素与第num2的位置相差 < iDist时，便移动
+                                            aSpan[j].style.top = aSpan[j].startTop + (Math.abs(iDis) - Math.abs(num2 - j)) * iNum + "px";
+                                        }else{ //当第j个元素与第num2的位置相差 > iDist时，便不再移动，让元素保持最初状态
+                                            aSpan[j].style.top = aSpan[j].startTop + "px";
+                                        }
+                                    }
+                                }
+                            };
+                            aSpan[num2].onmouseout = function(e)
+                            {
+                                // this.style.top = this.startTop + "px";//初始位置 + 差值
+                                for(var j=0;j<aSpan.length;j++){
+                                    starMove(aSpan[j],{top:aSpan[j].startTop},500,"elasticOut");
+                                }
+                            }
+                        })(aSpan,j);
                     }
                 }
-            })(aSpan,j);
+            }else{
+                alert(res.result);
+            }
+        },
+        error: function(res){
+            alert("加载失败"+JSON.stringify(res));
         }
-    }
+    });
+
     function animate(obj, json, interval, sp, fn) {
         clearInterval(obj.timer);
         function getStyle(obj, arr) {
